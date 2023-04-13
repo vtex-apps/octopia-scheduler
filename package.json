@@ -1,0 +1,10 @@
+{
+  "name": "octopia-scheduler",
+  "version": "0.0.1",
+  "description": "Scheduler service for Octopia Integration",
+  "main": "index.js",
+  "repository": "https://github.com/vtex-apps/octopia-scheduler",
+  "author": "EMEA-APAC App Architects",
+  "license": "MIT",
+  "private": false
+}
