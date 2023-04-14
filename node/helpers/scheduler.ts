@@ -9,6 +9,16 @@ interface Args {
 }
 
 /**
+ * Object with the expressions for the scheduler
+ * The expression for the offers is every 12 hours
+ * The expression for the orders is every hour
+ */
+const EXPRESSIONS = {
+  OFFERS: '0 0/12 * * *',
+  ORDERS: '0 ? * * *',
+}
+
+/**
  * Function to create the scheduler configuration
  *
  *
@@ -23,7 +33,7 @@ export function createSchedulerConfiguration(
     production,
     account,
     workspace,
-    expression = type === 'offers' ? '0 * 3 ? * 1/1 *' : '* * 0/1 ? * * *',
+    expression = type === 'offers' ? EXPRESSIONS.OFFERS : EXPRESSIONS.ORDERS,
   } = args
 
   return {
