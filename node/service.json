@@ -11,16 +11,16 @@
       "public": false
     },
     "getSchedulerById": {
-      "path": "/_v/octopia-scheduler/schedulers/:id",
-      "public": true
+      "path": "/_v/octopia-scheduler/pvt/schedulers/:id",
+      "public": false
     },
     "createOrUpdateScheduler": {
-      "path": "/_v/octopia-scheduler/schedulers/create-or-update/:type",
-      "public": true
+      "path": "/_v/octopia-scheduler/pvt/schedulers/create-or-update/:type",
+      "public": false
     },
     "deleteScheduler": {
-      "path": "/_v/octopia-scheduler/schedulers/delete/:id",
-      "public": true
+      "path": "/_v/octopia-scheduler/pvt/schedulers/delete/:id",
+      "public": false
     }
   }
 }

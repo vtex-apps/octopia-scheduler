@@ -6066,6 +6066,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+"vtex.octopia-scheduler@https://octopia--edydemo.myvtex.com/_v/private/typings/linked/v1/vtex.octopia-scheduler@0.0.1+build1683562679/public/@types/vtex.octopia-scheduler":
+  version "0.0.1"
+  resolved "https://octopia--edydemo.myvtex.com/_v/private/typings/linked/v1/vtex.octopia-scheduler@0.0.1+build1683562679/public/@types/vtex.octopia-scheduler#e02edec106dbeb6002d5c3a4263582038b8a300a"
+
 w3c-hr-time@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz#0a89cdf5cc15822df9c360543676963e0cc308cd"

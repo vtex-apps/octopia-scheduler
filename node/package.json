@@ -11,7 +11,8 @@
     "@vtex/api": "6.45.15",
     "@vtex/test-tools": "^1.0.0",
     "@vtex/tsconfig": "^0.5.6",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "vtex.octopia-scheduler": "https://octopia--edydemo.myvtex.com/_v/private/typings/linked/v1/vtex.octopia-scheduler@0.0.1+build1683562679/public/@types/vtex.octopia-scheduler"
   },
   "resolutions": {
     "@types/testing-library__dom": "6.12.1",

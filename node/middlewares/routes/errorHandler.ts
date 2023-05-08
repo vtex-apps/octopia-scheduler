@@ -2,6 +2,12 @@ export async function errorHandler(ctx: Context, next: () => Promise<void>) {
   try {
     await next()
   } catch (error) {
+    if (process.env.VTEX_APP_LINKED) {
+      console.error(error)
+
+      return
+    }
+
     const {
       vtex: { logger },
     } = ctx

@@ -1,10 +1,10 @@
 import { method } from '@vtex/api'
 
 import { errorHandler } from './errorHandler'
-import { getAllSchedulers } from './getAllSchedulers'
-import { getSchedulerById } from './getSchedulerById'
-import { createOrUpdateScheduler } from './createOrUpdateScheduler'
-import { deleteScheduler } from './deleteScheduler'
+import { getAllSchedulers } from './schedulers/getAll'
+import { getSchedulerById } from './schedulers/getById'
+import { createOrUpdateScheduler } from './schedulers/createOrUpdate'
+import { deleteScheduler } from './schedulers/delete'
 
 export const applicationRoutes = {
   getAllSchedulers: method({

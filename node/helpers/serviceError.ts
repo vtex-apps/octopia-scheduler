@@ -1,4 +1,4 @@
-interface ServiceErrorArgs {
+type ServiceErrorArgs = {
   message: string
   reason: string
   status?: number

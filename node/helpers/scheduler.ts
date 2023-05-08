@@ -1,46 +1,34 @@
-import type { SchedulerConfiguration } from '../typings/vtex.scheduler'
-
-interface Args {
-  type: 'offers' | 'orders'
-  production: boolean
-  account: string
-  workspace: string
-  expression?: string
-}
-
-/**
- * Object with the expressions for the scheduler
- * The expression for the offers is every 12 hours
- * The expression for the orders is every hour
- */
-const EXPRESSIONS = {
-  OFFERS: '0 0/12 * * *',
-  ORDERS: '0 ? * * *',
-}
+import type {
+  SchedulerConfiguration,
+  SchedulerConfigurationPayload,
+} from 'vtex.octopia-scheduler'
 
 /**
  * Function to create the scheduler configuration
- *
- *
  * @param args
  * @returns SchedulerConfiguration
  */
 export function createSchedulerConfiguration(
-  args: Args
+  args: SchedulerConfigurationPayload
 ): SchedulerConfiguration {
   const {
     type,
     production,
     account,
     workspace,
-    expression = type === 'offers' ? EXPRESSIONS.OFFERS : EXPRESSIONS.ORDERS,
+    id,
+    endDate,
+    expression,
+    uri,
+    headers = defaultHeaders(),
+    body = defaultBody(type),
   } = args
 
   return {
-    id: `${type.toUpperCase()}_SCHEDULER`,
+    id: id ?? createId(type),
     scheduler: {
-      expression,
-      endDate: createEndDate(production),
+      expression: expression ?? defaultExpression(type),
+      endDate: endDate ?? createEndDate(production),
     },
     retry: {
       delay: {
@@ -52,35 +40,53 @@ export function createSchedulerConfiguration(
       backOffRate: 2,
     },
     request: {
-      uri: `https://${workspace}--${account}.myvtex.com/_v/octopia-integration/${type}`,
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: {
-        text: `${type} scheduler`,
-      },
+      uri: uri ?? defaultUri(workspace, account, type),
+      method: 'POST',
+      headers,
+      body,
     },
   }
 }
 
-/**
- * Function to create the endDate for the scheduler
- *
- * If the environment is production, the endDate will be 10 years from now
- * If the environment is not production, the endDate will be 24 hours from now
- *
- * @param production boolena to check if the environment is production
- * @returns endDate in ISOString format
- */
+function createId(type: SchedulerConfigurationPayload['type']) {
+  return `${type.toUpperCase()}_SCHEDULER`
+}
+
 function createEndDate(production: boolean) {
   const endDate = new Date()
 
+  // If the environment is not production, the endDate will be 24 hours from now
   endDate.setHours(endDate.getHours() + 24)
 
+  // If the environment is production, the endDate will be 10 years from now
   if (production) {
     endDate.setFullYear(endDate.getFullYear() + 10)
   }
 
   return endDate.toISOString()
+}
+
+function defaultExpression(type: SchedulerConfigurationPayload['type']) {
+  return type === 'offers' ? '0 0/12 * * *' : '0 * * * *'
+}
+
+function defaultUri(
+  workspace: string,
+  account: string,
+  type: SchedulerConfigurationPayload['type']
+) {
+  return `https://${workspace}--${account}.myvtex.com/_v/octopia-integration/${type}`
+}
+
+function defaultHeaders() {
+  return {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  }
+}
+
+function defaultBody(type: SchedulerConfigurationPayload['type']) {
+  return {
+    text: `${type} scheduler`,
+  }
 }

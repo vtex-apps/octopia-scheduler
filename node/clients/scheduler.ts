@@ -1,11 +1,11 @@
 import type { IOContext, InstanceOptions } from '@vtex/api'
 import { JanusClient } from '@vtex/api'
-
-import { SCHEDULER_VERSION, VTEX_APP_NAME } from '../constants'
 import type {
   SchedulerConfiguration,
   SchedulerInformation,
-} from '../typings/vtex.scheduler'
+} from 'vtex.octopia-scheduler'
+
+import { SCHEDULER_VERSION, VTEX_APP_NAME } from '../constants'
 
 export class SchedulerClient extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
